@@ -75,7 +75,7 @@ def validate_new_image_size_or_exit(new_width, new_height):
         sys.exit(error_text.format(size="big", number='smaller'))
 
 
-def resize_image(**arguments):
+def resize_image(arguments):
     scale = arguments['scale']
     height = arguments['height']
     width = arguments['width']
@@ -109,4 +109,4 @@ def resize_image(**arguments):
 
 if __name__ == '__main__':
     arguments = get_args()
-    resize_image(**arguments)
+    resize_image(arguments)
