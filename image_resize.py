@@ -93,4 +93,6 @@ def resize_image(input_image, scale, height, width):
 
 if __name__ == '__main__':
     arguments = get_args()
-    resize_image(arguments)
+    input_image = open_image(arguments.filepath)
+    output_image = resize_image(input_image, arguments.scale, arguments.height, arguments.width)
+    save_image(arguments.filepath, output_image, arguments.output)
