@@ -23,11 +23,9 @@ def get_args():
     return args
 
 
-def check_if_proportions_equal(img_width, img_height, new_width, new_height):
+def is_proportions_equal(img_width, img_height, new_width, new_height):
     proportion = img_width / new_width - img_height / new_height
-    if proportion != 0:
-        print("Proportion of the output image are not equal to proportion original image.")
-
+    return proportion == 0
 
 def open_image(path_to_file):
     try:
@@ -73,7 +71,6 @@ def resize_image(input_image, scale, height, width):
     if scale:
         new_height = int(scale * img_height)
         new_width = int(scale * img_width)
-
     elif height and not width:
         new_height = height
         new_width = img_width * new_height / img_height
@@ -83,10 +80,10 @@ def resize_image(input_image, scale, height, width):
     elif height and width:
         new_height = height
         new_width = width
-        check_if_proportions_equal(img_width, img_height, new_width, new_height)
+        if not is_proportions_equal(img_width, img_height, new_width, new_height):
+                print("Proportion of the output image are not equal to proportion original image.")
 
     validate_new_image_size_or_exit(new_width, new_height)
-
     new_image = input_image.resize((new_width, new_height), Image.ANTIALIAS)
 
     return new_image
