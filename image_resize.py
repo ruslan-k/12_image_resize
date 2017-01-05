@@ -4,19 +4,11 @@ import sys
 
 from PIL import Image
 
-
-def allowed_scale_range(num):
-    num = float(num)
-    if num >= 0.1 and num <= 10.0:
-        return num
-    raise argparse.ArgumentTypeError("{} not in range (0.1-10.0)".format(num))
-
-
 def get_args():
     parser = argparse.ArgumentParser(description="Image resize script. Change height, width or scale")
     parser.add_argument("-ht", "--height", help="Height of new image in pixels", type=int)
     parser.add_argument("-wd", "--width", help="Width of new image in pixels", type=int)
-    parser.add_argument("-s", "--scale", help="Scale ratio of processed image. Cannot be used with -ht or -wd parameter", type=allowed_scale_range)
+    parser.add_argument("-s", "--scale", help="Scale ratio of processed image. Cannot be used with -ht or -wd parameter", type=float)
     parser.add_argument("-o", "--output",
                         help="Path to new image file. If not specified new file will be placed in the same folder as the original file")
     parser.add_argument("filepath", help="Path to original image file")
@@ -28,6 +20,8 @@ def get_args():
     if not args.scale and not (args.height or args.width):
         sys.exit('Reqired optional aguments: --scale(-sc) or --height(-ht) or/and --width(-wd)')
 
+    print(args)
+    print(vars(args))
     return vars(args)
 
 
