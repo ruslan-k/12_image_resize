@@ -20,9 +20,7 @@ def get_args():
     if not args.scale and not (args.height or args.width):
         sys.exit('Reqired optional aguments: --scale(-sc) or --height(-ht) or/and --width(-wd)')
 
-    print(args)
-    print(vars(args))
-    return vars(args)
+    return args
 
 
 def check_if_proportions_equal(img_width, img_height, new_width, new_height):
