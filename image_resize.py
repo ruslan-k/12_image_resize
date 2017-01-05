@@ -69,16 +69,8 @@ def validate_new_image_size_or_exit(new_width, new_height):
         sys.exit(error_text.format(size="big", number='smaller'))
 
 
-def resize_image(arguments):
-    scale = arguments['scale']
-    height = arguments['height']
-    width = arguments['width']
-    filepath = arguments['filepath']
-    output = arguments['output']
-
-    image = open_image(filepath)
-
-    img_width, img_height = image.size
+def resize_image(input_image, scale, height, width):
+    img_width, img_height = input_image.size
 
     if scale:
         new_height = int(scale * img_height)
@@ -97,9 +89,9 @@ def resize_image(arguments):
 
     validate_new_image_size_or_exit(new_width, new_height)
 
-    new_image = image.resize((new_width, new_height), Image.ANTIALIAS)
-    save_image(filepath, new_image, output, new_width, new_height)
+    new_image = input_image.resize((new_width, new_height), Image.ANTIALIAS)
 
+    return new_image
 
 if __name__ == '__main__':
     arguments = get_args()
