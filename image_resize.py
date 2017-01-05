@@ -37,24 +37,24 @@ def open_image(path_to_file):
     return image
 
 
-def save_image(filepath, processed_image, path_to_output_file, new_width, new_height):
-    if path_to_output_file:
+def save_image(input_image_path, output_image, output_image_path):
+    img_width, img_height = output_image.size
+    if output_image_path:
         try:
-            full_path = os.path.join(os.getcwd(), path_to_output_file)
-            processed_image.save(full_path)
+            full_path = os.path.join(os.getcwd(), output_image_path)
         except IOError:
             sys.exit('Wrong path for output file.')
         except KeyError:
             sys.exit('Wrong extension of output file. Please use image file format extension.')
     else:
-        filename, extension = os.path.os.path.splitext(filepath)
+        filename, extension = os.path.os.path.splitext(input_image_path)
         full_path = os.path.join(os.getcwd(), '{filename}__{width}x{height}{extension}'.format(
             filename=filename,
-            width=new_width,
-            height=new_height,
+            width=img_width,
+            height=img_height,
             extension=extension
         ))
-        processed_image.save(full_path)
+    output_image.save(full_path)
     print('File saved as {}'.format(full_path))
 
 
